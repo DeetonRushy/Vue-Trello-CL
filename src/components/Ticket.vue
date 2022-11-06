@@ -26,7 +26,7 @@ const timeCreated = now.split(' ')[0]
         class="ticket-close-icon"
         @click="$emit('removed', index)"
     />
-    <textarea v-model="ticketName" placeholder="Ticket name" class="ticket-title" rows="2" />
+    <textarea v-model="ticketName" placeholder="Ticket name" class="ticket-title" rows="3" />
     <br/>
     <button @click="ContentsOpen = true" class="ticket-button">Open</button>
 
@@ -66,19 +66,11 @@ export default {
 
 .ticket-title {
   width: 80%;
-  height: 20px;
 
   background-color: inherit;
   color: white;
   border: 0;
   text-align: center;
-}
-
-.ticket-title:active {
-  -moz-box-shadow: none;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  outline: none;
 }
 
 .ticket-close-icon{
@@ -118,15 +110,15 @@ export default {
   border: none;
 }
 
-.ticket-popup-contents:focus {
+textarea {
+  resize: none;
+}
+
+textarea:focus {
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
   box-shadow: none;
   outline: none;
-}
-
-textarea {
-  resize: none;
 }
 
 hr {
