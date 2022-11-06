@@ -23,7 +23,7 @@ export default {
 }
 
 html{
-  background-color: white;
+  background-color: #dcdbdb;
 }
 
 div[class="ticket-content-popup"] {

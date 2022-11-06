@@ -14,6 +14,31 @@ const ContentsOpen = ref(false)
 
 const now = new Date(Date.now()).toTimeString()
 const timeCreated = now.split(' ')[0]
+
+const openContents = () => {
+  ContentsOpen.value = true
+}
+
+const notifyMsg = ref('')
+const notifyActive = ref(false)
+
+/*
+* const notify = (msg) => {
+  if (notifyActive.value){
+    // skip
+    return
+  }
+  notifyMsg.value = msg
+  notifyActive.value = true
+  setInterval(() => {
+    notifyActive.value = false
+    notifyMsg.value = ''
+  }, 3500)
+}
+* */
+
+const activeTicketName = () => ticketName.value === '' ? 'No Title' : ticketName.value;
+
 </script>
 
 <template>
@@ -27,14 +52,17 @@ const timeCreated = now.split(' ')[0]
         @click="$emit('removed', index)"
     />
     <textarea v-model="ticketName" placeholder="Ticket name" class="ticket-title" rows="3" />
+    <div v-if="notifyActive === true" class="ticket-notification">
+      {{ notifyMsg }}
+    </div>
     <br/>
-    <button @click="ContentsOpen = true" class="ticket-button">Open</button>
+    <button @click="openContents" class="ticket-button">Open</button>
 
     <div v-if="ContentsOpen === true" class="ticket-content-popup">
       <Icon icon="akar-icons:circle-x-fill" class="ticket-close-icon" @click="ContentsOpen = false"/>
       <!-- display contents nicely -->
       <p class="ticket-popup-title">
-        {{ ticketName }} - (Made at {{timeCreated}})
+        {{ activeTicketName() }} - (Made at {{timeCreated}})
       </p>
       <hr/>
       <textarea v-model="ticketContents" placeholder="Ticket Description" class="ticket-popup-contents" rows="8">
@@ -55,13 +83,15 @@ export default {
 <style scoped>
 
 .ticket {
+  background-color: #283a50;
+
   flex-direction: row;
   margin: auto;
   position: relative;
   height: 80px;
   width: 90%;
   padding-top: 10px;
-  border: 1px solid white;
+  border: 3px inset white;
 }
 
 .ticket-title {
@@ -108,6 +138,13 @@ export default {
   color: white;
 
   border: none;
+}
+
+.ticket-notification {
+  display: inline-block;
+  text-align: center;
+  height: 20%;
+  width: 100%;
 }
 
 textarea {
