@@ -16,8 +16,7 @@ const items = ref([1])
 const addItem = () => {
   let next = items.value[items.value.length - 1];
   if (next === undefined || next < 0){
-    next = 1
-    items.value.push(next)
+    items.value.push(1)
     return
   }
   items.value.push(next + 1)
