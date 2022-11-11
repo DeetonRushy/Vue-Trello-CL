@@ -8,7 +8,7 @@ import Column from "@/components/Column";
 *
 * All states are managed within each component. (other than index)
 *
-* Don't even ask how I landed on an array of number that literally represent nothing.
+* Don't even ask how I landed on an array of numbers that literally represent nothing.
 * */
 
 const items = ref([1])
@@ -37,7 +37,7 @@ const removeItem = (index) => {
       <p>Add something, or else..</p>
       <br/>
     </div>
-    <Column v-for="(item, index) in items" :key="index" :index="index" @column-removed="removeItem(index)" />
+    <Column v-for="(unused, index) in items" :key="index" :index="index" @column-removed="removeItem(index)" />
     <div class="home-add">
       <button @click="addItem" class="home-add">New</button>
     </div>
